@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hangman</title>
+        <link rel="stylesheet" href="../static/styles.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet"> 
+    </head>
+    <body>
+
+        <h1 id="heading">HANGMAN</h1>
+
+        <div id="start-div">
+            <ul class="buttons">
+                <li class="button" onclick="startGameAuto()">PLAY VS COMPUTER</li>
+                <li class="button" onclick="showEnterWordDiv()">PLAY VS SOMEONE ELSE</li>
+
+            </ul>
+        </div>
+
+        <div id="enter-word-div"> 
+            <h2>ENTER A WORD</h2>
+            <ul class="buttons">
+                <li><input id="entered-word" type="text"></li>
+                <li class="button" onclick="startGameManual()">PLAY</li>
+            </ul>
+        </div>
+        
+        <div id="game-div">
+            <ul id="letters">
+
+            </ul>          
+            <div id="keyboard-div">
+                <ul class="keyboard" id="top-row-keyboard">
+                    <li id="q" class="key" onclick="keyPressed(this.id)">Q</li>
+                    <li id="w" class="key" onclick="keyPressed(this.id)">W</li>
+                    <li id="e" class="key" onclick="keyPressed(this.id)">E</li>
+                    <li id="r" class="key" onclick="keyPressed(this.id)">R</li>
+                    <li id="t" class="key" onclick="keyPressed(this.id)">T</li>
+                    <li id="y" class="key" onclick="keyPressed(this.id)">Y</li>
+                    <li id="u" class="key" onclick="keyPressed(this.id)">U</li>
+                    <li id="i" class="key" onclick="keyPressed(this.id)">I</li>
+                    <li id="o" class="key" onclick="keyPressed(this.id)">O</li>
+                    <li id="p" class="key" onclick="keyPressed(this.id)">P</li>
+                </ul>
+                <ul class="keyboard" id="middle-row-keyboard">
+                    <li id="a" class="key" onclick="keyPressed(this.id)">A</li>
+                    <li id="s" class="key" onclick="keyPressed(this.id)">S</li>
+                    <li id="d" class="key" onclick="keyPressed(this.id)">D</li>
+                    <li id="f" class="key" onclick="keyPressed(this.id)">F</li>
+                    <li id="g" class="key" onclick="keyPressed(this.id)">G</li>
+                    <li id="h" class="key" onclick="keyPressed(this.id)">H</li>
+                    <li id="j" class="key" onclick="keyPressed(this.id)">J</li>
+                    <li id="k" class="key" onclick="keyPressed(this.id)">K</li>
+                    <li id="l" class="key" onclick="keyPressed(this.id)">L</li>
+                </ul>
+                <ul class="keyboard" id="bottom-row-keyboard">
+                    <li id="z" class="key" onclick="keyPressed(this.id)">Z</li>
+                    <li id="x" class="key" onclick="keyPressed(this.id)">X</li>
+                    <li id="c" class="key" onclick="keyPressed(this.id)">C</li>
+                    <li id="v" class="key" onclick="keyPressed(this.id)">V</li>
+                    <li id="b" class="key" onclick="keyPressed(this.id)">B</li>
+                    <li id="n" class="key" onclick="keyPressed(this.id)">N</li>
+                    <li id="m" class="key" onclick="keyPressed(this.id)">M</li>
+                </ul>
+            </div> 
+
+            <div id="graphics">
+  
+            </div>
+        </div>
+
+        <div id="game-over">
+            <p><h2>GAME OVER :(</h2></p>
+            <ul class="buttons">
+                <li class="button" onclick="reload()">Try Again</li>
+            </ul>
+        </div>
+
+        <div id="game-won">
+            <p><h2>WELL DONE, YOU WON :)</h2></p>
+            <ul class="buttons">
+                <li class="button" onclick="reload()">Try Again</li>
+            </ul>
+        </div>
+
+<script src="../static/app.js">
+
+</script>    
+
+</body>
+</html>
