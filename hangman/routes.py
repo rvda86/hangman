@@ -1,5 +1,5 @@
 from hangman import app
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify
 from hangman.db import DB
 
 @app.route("/")
