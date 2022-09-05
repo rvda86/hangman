@@ -5,7 +5,7 @@ body {
 #heading {
     text-align: center;
     font-family: 'Seymour One', sans-serif;
-    font-size: 2.5em;
+    font-size: 5em;
     margin: 0;
 }
 
@@ -15,12 +15,7 @@ body {
     font-family: sans-serif;
 }
 
-h2 {
-    text-align: center;
-    font-family: 'Seymour One', sans-serif;
-}
-
-h4 {
+h2, h4, p {
     text-align: center;
     font-family: 'Seymour One', sans-serif;
 }
@@ -72,15 +67,24 @@ h4 {
 
 /* display divs */
 
-#game-div, #game-over, #game-won, #enter-word-div{
+#game-div, #game-finished, #enter-word-div{
     display: none;
+}
+
+#game-div {
+    justify-content: center;
+    flex-direction: column;
 }
 
 /* graphics */
 #graphics {
-	background-image: url("gras_base.svg");
     width: 100%;
-    height: 300px;
+}
+
+#gallow {
+    display: block;
+    margin: auto;
+    margin-top: 50px;
 }
 
 /* keyboard */ 
@@ -105,11 +109,14 @@ h4 {
 
 /* media queries */
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     #heading {
-        font-size: 3.5em;
+        font-size: 2.5em;
     }
     
+    #gallow {
+        max-height: 250px;
+    }    
     .button {
         width: 200px;
     }
@@ -118,35 +125,43 @@ h4 {
         padding: 9px;
     }
 
-.letter-li {
-
-    padding: 10px;
-    width: 10px;
-    height: 10px;
-    margin: 1px;
-
-}
+    .letter-li {
+        padding: 10px;
+        width: 10px;
+        height: 10px;
+        margin: 1px;
+    }
 }
 
-
-@media screen and (min-width: 500px) {
+@media screen and (max-width: 1000px) and (orientation: landscape) {
+    #game-div {
+        flex-direction: row;
+    }
+    #letters-keyboard {
+        width: 50%;
+    }
+    #graphics {
+        width: 50%;
+    }
     #heading {
-        font-size: 3.5em;
+        font-size: 2.5em;
     }
     
+    #gallow {
+        max-height: 250px;
+    }    
     .button {
         width: 200px;
     }
-}
-
-
-@media screen and (min-width: 800px) {
-    #heading {
-        font-size: 5em;
+    .key {
+        margin: 1px;
+        padding: 9px;
     }
-    
-    .button {
-        width: 200px;
+
+    .letter-li {
+        padding: 10px;
+        width: 10px;
+        height: 10px;
+        margin: 1px;
     }
 }
-

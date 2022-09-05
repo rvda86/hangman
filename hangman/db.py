@@ -18,16 +18,16 @@ class DB:
 
     add_words_sql = "INSERT INTO words (word) VALUES (?)"
     wordcount_sql = "SELECT COUNT(*) FROM words"
-    select_word_sql = "SELECT * FROM words WHERE id = ?" 
+    get_word_by_id_sql = "SELECT * FROM words WHERE id = ?"
 
     @staticmethod
-    def random_word():
+    def get_random_word():
         try:
             conn, c = DB.create_connection()
             c.execute(DB.wordcount_sql)
             total_wordcount = c.fetchone()[0]
             random_word_id = random.randint(1, total_wordcount)
-            c.execute(DB.select_word_sql, (random_word_id, ))
+            c.execute(DB.get_word_by_id_sql, (random_word_id, ))
             return c.fetchone()
         except Error as e:
             print(e)

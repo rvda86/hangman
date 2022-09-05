@@ -1,6 +1,11 @@
 
 class Game {
-    word = ""
+
+    constructor(api) {
+        this.api = api
+    }
+
+    data = {}
     mistakes = 0 
     maxMistakes = 10
     lettersCorrect = []
@@ -9,38 +14,54 @@ class Game {
 
     startGame() {
         this.gui.showGameScreen()
-        this.gui.createLettersPlaceholders(this.word)
+        this.gui.createLettersPlaceholders(this.data.word)
     }
 
     setWord(word) {
         word = word.toLowerCase()
-        if (!/[^a-z]/.test(word)) this.word = word
+        if (/^[a-zA-Z]+$/.test(word)) {
+            this.data.word = word
+            console.log(word)
+            this.startGame()
+        } else {
+            this.gui.showEnteredWordFeedback()
+        }  
+    }
+
+    setData(data) {
+        this.data = data
     }
 
     keyPressed(key) {
         this.gui.disableKey(key)
-        if (this.word.includes(key)) {
+        if (this.data.word.includes(key)) {
             this.gui.makeKeyGreen(key)            
-            this.gui.showCorrectLetter(key, this.word)
+            this.gui.showCorrectLetter(key, this.data.word)
             this.lettersCorrect.push(key)
             this.checkIfWon()
         } else {
             this.gui.makeKeyRed(key)
             this.mistakes++
-            this.checkIfLost()            
+            this.gui.updateGallow(this.mistakes)
+            this.checkIfLost()           
+
         }
     }
 
     checkIfLost() {
-        if (this.mistakes >= this.maxMistakes) this.gui.showGameOverScreen()
-    }
+        if (this.mistakes >= this.maxMistakes) {
+            this.gui.showGameFinishedScreen(this.data.word, false)
+            }
+        }
 
     checkIfWon() {
-        for (let letter of this.word) {
+        for (let letter of this.data.word) {
             if (!this.lettersCorrect.includes(letter)) return this.gameWon = false
             else this.gameWon = true
         }
-        if (this.gameWon) this.gui.showVictoryScreen()
+        if (this.gameWon) {
+            this.gui.showGameFinishedScreen(this.data.word, true)
+        }
     }
 }
 
@@ -63,6 +84,11 @@ class GameGUI {
         }
     }
 
+    updateGallow(mistakes) {
+        const gallow = document.getElementById("gallow")
+        gallow.setAttribute("src", `../static/gallow${mistakes}.svg` )
+    }
+
     makeKeyGreen(key) {
         document.getElementById(key).style.backgroundColor = "green"
     }
@@ -78,26 +104,26 @@ class GameGUI {
     showGameScreen() {
         document.getElementById("start-div").style.display = "none";
         document.getElementById("enter-word-div").style.display = "none";
-        document.getElementById("game-div").style.display = "block";
+        document.getElementById("entered-word-feedback").innerHTML= "";
+        document.getElementById("game-div").style.display = "flex";
     }
-
-    showVictoryScreen() {
+    showGameFinishedScreen(word, won) {
         document.getElementById("game-div").style.display = "none";
-        document.getElementById("game-won").style.display = "block";
+        document.getElementById("game-finished").style.display = "block";
+        document.getElementById("game-finished-word").innerHTML = `The word was "${word}"`
+        document.getElementById("game-finished-header").innerHTML = (won) ? 'Congratulation! You won!' : 'Game Over'
     }
-
-    showGameOverScreen() {
-        document.getElementById("game-div").style.display = "none";
-        document.getElementById("game-over").style.display = "block";
-    }
-
     showEnterWordDiv() {
         document.getElementById("start-div").style.display = "none";
         document.getElementById("enter-word-div").style.display = "block";
+        document.getElementById("entered-word-feedback").innerHTML= "";
+    }
+    showEnteredWordFeedback() {
+        document.getElementById("entered-word-feedback").innerHTML = "Please enter letters only";
     }
 }
 
-let gameInstance = new Game
+let gameInstance = new Game('http://192.168.2.3:5000/word')
 
 function showEnterWordDiv() {
     gameInstance.gui.showEnterWordDiv()
@@ -105,17 +131,15 @@ function showEnterWordDiv() {
 
 async function startGameAuto() {
     let options = {method: 'GET', headers: {'Content-type': 'application/json'}}
-    let api = 'http://192.168.2.2:5000/word'
-    let response = await fetch(`${api}`, options)
+    let response = await fetch(`${gameInstance.api}`, options)
     let data = response.json()
-    data.then(data => gameInstance.setWord(data.word))
+    data.then(data => gameInstance.setData(data))
     data.then(() => gameInstance.startGame())
 }
 
 function startGameManual() {
     let word = document.getElementById("entered-word").value
     gameInstance.setWord(word)
-    gameInstance.startGame()
 }
 
 function keyPressed(key) {
