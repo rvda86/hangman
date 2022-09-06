@@ -1,15 +1,10 @@
 from hangman import app
 from flask import render_template, jsonify
 from hangman.db import DB
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-API_LINK = os.getenv("API_LINK")
 
 @app.route("/")
 def index():
-    return render_template('index.html', api_link=API_LINK)
+    return render_template('index.html')
 
 @app.route("/word")
 def get_random_word():

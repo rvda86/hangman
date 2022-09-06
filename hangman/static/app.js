@@ -122,7 +122,7 @@ class GameGUI {
     }
 }
 
-let gameInstance = new Game(apiLink)
+let gameInstance = new Game(`${location.href}word`)
 
 function showEnterWordDiv() {
     gameInstance.gui.showEnterWordDiv()
