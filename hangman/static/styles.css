@@ -25,6 +25,11 @@ h2, h4, p {
     padding: 7px;
 }
 
+#entered-word-feedback {
+    font-family: 'Seymour One', sans-serif;
+    font-size: 0.8em;
+}
+
 #letters {
     padding: 0;
     display: flex;
@@ -56,7 +61,7 @@ h2, h4, p {
     margin: 5px;
     margin-bottom: 20px;
     padding: 20px;
-    width: 40%;
+    width: 300px;
     background-color: rgb(32, 98, 124);
     text-align: center;
     color: skyblue;
@@ -64,16 +69,15 @@ h2, h4, p {
     font-weight: bold;
 }
 
+#game-div {
+    justify-content: center;
+    flex-direction: column;
+}
 
 /* display divs */
 
 #game-div, #game-finished, #enter-word-div{
     display: none;
-}
-
-#game-div {
-    justify-content: center;
-    flex-direction: column;
 }
 
 /* graphics */
@@ -139,17 +143,23 @@ h2, h4, p {
     }
     #letters-keyboard {
         width: 50%;
+        height: 250px;
+        margin: 20px;
     }
     #graphics {
         width: 50%;
+        height: 250px;
+        margin: 20px;
     }
     #heading {
         font-size: 2.5em;
     }
     
     #gallow {
+        margin: 0;
+        margin: auto;
         max-height: 250px;
-    }    
+    }
     .button {
         width: 200px;
     }
