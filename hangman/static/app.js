@@ -1,4 +1,3 @@
-
 class Game {
 
     constructor(api) {
@@ -123,7 +122,7 @@ class GameGUI {
     }
 }
 
-let gameInstance = new Game('http://192.168.2.3:5000/word')
+let gameInstance = new Game(apiLink)
 
 function showEnterWordDiv() {
     gameInstance.gui.showEnterWordDiv()
