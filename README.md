@@ -1,6 +1,6 @@
 # Hangman
 
-Try to guess the word correctly
+Try to guess the word correctly.
 
 [Live Demo](https://playhangman.net)
 
