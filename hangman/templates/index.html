@@ -4,13 +4,14 @@
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hangman</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" href="../static/styles.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet"> 
     </head>
     <body>
 
-        <h1 id="heading">HANGMAN</h1>
+        <h1 id="heading" onclick="reload()">HANGMAN</h1>
 
         <div id="start-div">
             <ul class="buttons">
@@ -23,13 +24,21 @@
         <div id="enter-word-div"> 
             <h2>ENTER A WORD</h2>
             <ul class="buttons">
-                <li><input id="entered-word" type="text"></li>
+                <li><input id="entered-word" type="text" placeholder="word to be guessed.."></li>
                 <li id="entered-word-feedback">Please enter a valid word</li>
                 <li class="button" onclick="startGameManual()">PLAY</li>
             </ul>
         </div>
         
         <div id="game-div">
+
+            <div id="game-finished">
+                <h2 id="game-finished-header"></h2>
+                <p id="game-finished-word"></p>
+                <ul class="buttons">
+                    <li class="button" onclick="reload()">Play Again</li>
+                </ul>
+            </div>
 
             <div id="letters-keyboard">
                 <ul id="letters">
@@ -74,14 +83,6 @@
             <div id="graphics">
                 <img id="gallow" src="">
             </div>
-        </div>
-
-        <div id="game-finished">
-            <h2 id="game-finished-header"></h2>
-            <p id="game-finished-word"></p>
-            <ul class="buttons">
-                <li class="button" onclick="reload()">Play Again</li>
-            </ul>
         </div>
 
 <script src="../static/app.js"></script>    

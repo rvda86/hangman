@@ -20,10 +20,9 @@ class Game {
         word = word.toLowerCase()
         if (/^[a-zA-Z]+$/.test(word)) {
             this.data.word = word
-            console.log(word)
             this.startGame()
         } else {
-            this.gui.showEnteredWordFeedback()
+            this.gui.showEnteredWordFeedback(word)
         }  
     }
 
@@ -107,18 +106,18 @@ class GameGUI {
         document.getElementById("game-div").style.display = "flex";
     }
     showGameFinishedScreen(word, won) {
-        document.getElementById("game-div").style.display = "none";
+        document.getElementById("letters-keyboard").style.display = "none";
         document.getElementById("game-finished").style.display = "block";
         document.getElementById("game-finished-word").innerHTML = `The word was "${word}"`
-        document.getElementById("game-finished-header").innerHTML = (won) ? 'Congratulation! You won!' : 'Game Over'
+        document.getElementById("game-finished-header").innerHTML = (won) ? 'Congratulations! You won!' : 'Game Over'
     }
     showEnterWordDiv() {
         document.getElementById("start-div").style.display = "none";
         document.getElementById("enter-word-div").style.display = "block";
         document.getElementById("entered-word-feedback").innerHTML= "";
     }
-    showEnteredWordFeedback() {
-        document.getElementById("entered-word-feedback").innerHTML = "Please enter letters only";
+    showEnteredWordFeedback(word) {
+        document.getElementById("entered-word-feedback").innerHTML = (word.length == 0) ? "Please enter a word" : "Please enter letters only";
     }
 }
 
